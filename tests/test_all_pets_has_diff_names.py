@@ -1,8 +1,14 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_all_pets_has_diff_names(driver, my_pets):
    '''Поверяем что на странице со списком моих питомцев, у всех питомцев разные имена'''
+
+   # Устанавливаем явное ожидание
+   wait = WebDriverWait(driver, 10).until(
+      EC.presence_of_element_located((By.CSS_SELECTOR, ".table.table-hover tbody tr")))
 
    # Сохраняем в переменную pet_data элементы с данными о моих питомцах
    pet_data = driver.find_elements(By.CSS_SELECTOR, '.table.table-hover tbody tr')
@@ -22,12 +28,12 @@ def test_all_pets_has_diff_names(driver, my_pets):
    for i in range(len(pets_name)):
       if pets_name.count(pets_name[i]) > 1:
          counter += 1
-         assert counter == 0
-      else:
-         # Если есть повторяющиеся имена питомцев, то выкидываем исключение с текстом о наличии таких питомцев
-         raise Exception(f'Есть повторяющиеся имена питомцев')
-      print(f'\nСовпадающих имен: {counter}')
-      print(f'Все имена питомцев: {pets_name}')
+
+   print(f'\nСовпадающих имен: {counter}')
+   print(f'Все имена питомцев: {pets_name}')
+
+   # Проверяем, есть ли повторяющиеся имена питомцев
+   assert counter == 0
 
 
 

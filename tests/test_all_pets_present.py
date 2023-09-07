@@ -1,11 +1,14 @@
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 def test_all_pets_present(driver, my_pets):
    '''Проверяем что на странице со списком моих питомцев присутствуют все питомцы'''
 
-   time.sleep(1)  # небольшая задержка
+   # Устанавливаем явное ожидание
+   wait = WebDriverWait(driver, 10).until(
+      EC.presence_of_element_located((By.XPATH, '//*[@id="all_my_pets"]/table[1]/tbody/tr')))
 
    # Получение списка всех обьектов питомцев
    all_my_pets = driver.find_elements(By.XPATH, '//*[@id="all_my_pets"]/table[1]/tbody/tr')
@@ -37,4 +40,4 @@ def test_all_pets_present(driver, my_pets):
 
    # Проверка равенства количества питомцев в карточках с количеством питомцев из данных статистики
    assert number_of_pets == num_stat
-   print(f'\nnumber_of_pets: {number_of_pets} == num_stat: {num_stat}')
+   print(f'\nКоличество питомцев в карточках: {number_of_pets} == Количество питомцев из статистики: {num_stat}')

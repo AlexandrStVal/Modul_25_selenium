@@ -6,7 +6,7 @@ def test_no_duplicate_pets(driver, my_pets):
     '''Поверяем что на странице со списком моих питомцев нет повторяющихся питомцев'''
 
     # Устанавливаем явное ожидание
-    element = WebDriverWait(driver, 10).until(
+    wait = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, ".table.table-hover tbody tr")))
 
     # Сохраняем в переменную pet_data элементы с данными о питомцах
