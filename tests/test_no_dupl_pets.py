@@ -1,3 +1,5 @@
+""" Modul 25 """
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -6,7 +8,7 @@ def test_no_duplicate_pets(driver, my_pets):
     '''Поверяем что на странице со списком моих питомцев нет повторяющихся питомцев'''
 
     # Устанавливаем явное ожидание
-    wait = WebDriverWait(driver, 10).until(
+    element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, ".table.table-hover tbody tr")))
 
     # Сохраняем в переменную pet_data элементы с данными о питомцах

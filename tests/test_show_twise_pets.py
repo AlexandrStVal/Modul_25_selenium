@@ -1,6 +1,5 @@
-""" Moduls 25 """
+""" Modul 25 """
     
-import time
 from selenium.webdriver.common.by import By
 from settings import valid_email, valid_password
 
